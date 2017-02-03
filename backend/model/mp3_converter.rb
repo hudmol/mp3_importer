@@ -64,7 +64,7 @@ class Mp3Converter < Converter
     @batch << resource
 
     # Archival objects
-    tracks.each_with_index do |track, idx|
+    tracks do |track|
       ao_uri = "/repositories/12345/archival_objects/import_#{SecureRandom.hex}"
 
       ao = JSONModel(:archival_object).from_hash({
@@ -86,7 +86,7 @@ class Mp3Converter < Converter
                                                        'expression' => track.year.to_s,
                                                      }
                                                    ],
-                                                   'position' => idx,
+                                                   'position' => track.track_nr,
                                                    'notes' => [
                                                      {
                                                        'jsonmodel_type' => 'note_singlepart',
